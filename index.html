@@ -8,7 +8,14 @@
 </head>
 <body>
   <header>
-    <h1>Cartelera</h1>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;">
+      <h1>Cartelera</h1>
+      <div>
+        <button id="login-btn" aria-haspopup="dialog">Iniciar sesión</button>
+        <button id="logout-btn" style="display:none;">Cerrar sesión</button>
+        <span id="user-greeting" style="margin-left:0.75rem;color:#fff;font-weight:600;display:none;"></span>
+      </div>
+    </div>
   </header>
 
   <main class="container">
@@ -20,6 +27,39 @@
   <footer>
     <p>App Cine — Ejemplo</p>
   </footer>
+
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;">
+    <div class="modal-backdrop" data-action="close" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);"></div>
+    <div class="modal-panel" role="document" style="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:1rem;border-radius:8px;min-width:280px;box-shadow:0 6px 24px rgba(0,0,0,0.2);">
+      <button class="modal-close" data-action="close" aria-label="Cerrar" style="float:right;border:0;background:transparent;font-size:1rem;">✕</button>
+      <h3>Iniciar sesión</h3>
+      <form id="login-form">
+        <label for="username">Nombre de usuario</label>
+        <input id="username" name="username" required style="width:100%;padding:0.5rem;margin-top:0.25rem;margin-bottom:0.5rem;" />
+        <div style="display:flex;justify-content:flex-end;gap:0.5rem;">
+          <button type="button" data-action="cancel">Cancelar</button>
+          <button type="submit">Entrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div id="booking-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;">
+    <div class="modal-backdrop" data-action="close" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);"></div>
+    <div class="modal-panel" role="document" style="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:1rem;border-radius:8px;min-width:300px;box-shadow:0 6px 24px rgba(0,0,0,0.2);">
+      <button class="modal-close" data-action="close" aria-label="Cerrar" style="float:right;border:0;background:transparent;font-size:1rem;">✕</button>
+      <h3 id="booking-title">Reservar entrada</h3>
+      <p id="booking-subtitle" style="margin-top:0.25rem;color:#444;font-size:0.95rem;"></p>
+      <label for="qty">Cantidad</label>
+      <input id="qty" type="number" min="1" max="10" value="1" style="width:5rem;margin-left:0.5rem;">
+      <div style="display:flex;justify-content:flex-end;gap:0.5rem;margin-top:0.75rem;">
+        <button type="button" data-action="cancel">Cancelar</button>
+        <button id="confirm-booking" type="button">Confirmar reserva</button>
+      </div>
+    </div>
+  </div>
 
   <script src="app.js" defer></script>
 </body>
