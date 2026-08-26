@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cartelera — Cine MVP</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-row">
+        <div class="title-block">
+          <h1 class="site-title">Cartelera</h1>
+          <p class="site-subtitle">Elige tu película</p>
+        </div>
+
+        <!-- User header container (JS actualizará su contenido) -->
+        <div id="user-header" class="auth-actions">
+          <button type="button" onclick="abrirModalLogin()" class="login-btn">Iniciar sesión</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="app" class="container">
+      <!-- Cartelera: las tarjetas se renderizan dinámicamente aquí -->
+      <div id="cartelera" class="cartelera"></div>
+
+      <!-- Vista de horarios: inicialmente oculta -->
+      <section id="schedule-view" class="schedule-view hidden" aria-hidden="true"></section>
+
+      <!-- Vista de éxito: inicialmente oculta -->
+      <section id="success-view" class="success-view hidden" aria-hidden="true"></section>
+    </main>
+
+    <footer class="site-footer">
+      <small>App de reserva - MVP (solo interfaz)</small>
+    </footer>
+
+    <!-- Login modal (simplificado, usa funciones globales) -->
+    <div id="modal-login" class="modal hidden" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="login-title">
+      <div class="modal-backdrop" onclick="cerrarModalLogin()"></div>
+
+      <div class="modal-content" role="document" aria-live="polite">
+        <button class="modal-close" aria-label="Cerrar" onclick="cerrarModalLogin()">✕</button>
+        <h2 id="login-title">Iniciar sesión</h2>
+
+        <div class="login-form" style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+          <label for="input-usuario" style="color:var(--muted);">Nombre de usuario</label>
+          <input id="input-usuario" type="text" placeholder="Tu nombre" autocomplete="name" style="padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.02); color:var(--text);" />
+          <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:6px;">
+            <button type="button" onclick="iniciarSesion()" class="btn">Entrar</button>
+            <button type="button" class="btn btn-ghost" onclick="cerrarModalLogin()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
