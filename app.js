@@ -1,5 +1,5 @@
-// app.js — Renderiza películas y horarios de forma responsiva
-// Incluye: login modal (localStorage) y booking modal con selección de cantidad y confirmación
+// app.js — Renderiza películas y horarios de forma responsiva con trailers y posters
+// Incluye: login modal (localStorage), booking modal y modal de trailer
 
 const peliculas = [
   {
@@ -71,24 +71,17 @@ function openModal(modal){
   modal.style.display = 'block';
   modal.setAttribute('aria-hidden','false');
 }
+
 function closeModal(modal){
   if(!modal) return;
   modal.style.display = 'none';
   modal.setAttribute('aria-hidden','true');
 }
 
-function handleModalClicks(e){
-  const action = e.target.dataset.action;
-  if(action === 'close' || action === 'cancel'){
-    const modal = e.target.closest('.modal');
-    closeModal(modal);
-  }
-}
-
 // Delegar cierre en backdrop y botones con data-action
 document.addEventListener('click', (e)=>{
   if(e.target.matches('[data-action="close"]') || e.target.matches('[data-action="cancel"]')){
-    const modal = e.target.closest('.modal');
+    const modal = e.target.closest('.modal') || e.target.closest('.modal-overlay');
     if(modal) closeModal(modal);
   }
 });
@@ -99,10 +92,12 @@ function getUser(){
     return JSON.parse(localStorage.getItem('cineUser')) || null;
   }catch(e){return null}
 }
+
 function setUser(user){
   localStorage.setItem('cineUser', JSON.stringify(user));
   updateAuthView();
 }
+
 function clearUser(){
   localStorage.removeItem('cineUser');
   updateAuthView();
@@ -126,16 +121,42 @@ function updateAuthView(){
 loginBtn.addEventListener('click', ()=> openModal(loginModal));
 logoutBtn.addEventListener('click', ()=> { clearUser(); alert('Sesión cerrada'); });
 
+function setUserWrapper(user){
+  setUser(user);
+  const ev = new Event('cine:logged-in');
+  document.dispatchEvent(ev);
+}
+
 loginForm.addEventListener('submit', (e)=>{
   e.preventDefault();
   const uname = document.getElementById('username').value.trim();
   if(!uname) return;
-  setUser({name: uname});
+  setUserWrapper({name: uname});
   closeModal(loginModal);
 });
 
-// --- Booking flow ---
+// --- Manejo del Trailer ---
+window.abrirTrailer = function(trailerId) {
+  const modal = document.getElementById("modal-trailer");
+  const iframe = document.getElementById("iframe-trailer");
+  if(modal && iframe){
+    iframe.src = `https://www.youtube.com/embed/${trailerId}?autoplay=1`;
+    modal.classList.remove("hidden");
+    modal.style.display = 'flex';
+  }
+};
 
+window.cerrarTrailer = function() {
+  const modal = document.getElementById("modal-trailer");
+  const iframe = document.getElementById("iframe-trailer");
+  if(modal && iframe){
+    iframe.src = "";
+    modal.classList.add("hidden");
+    modal.style.display = 'none';
+  }
+};
+
+// --- Booking flow ---
 function openBooking(movieId, title, time){
   currentBooking = {movieId, title, time};
   bookingTitle.textContent = `Reservar: ${title}`;
@@ -147,7 +168,6 @@ function openBooking(movieId, title, time){
 confirmBookingBtn.addEventListener('click', ()=>{
   const user = getUser();
   if(!user){
-    // si no está logueado, pedimos login primero
     closeModal(bookingModal);
     openModal(loginModal);
     return;
@@ -161,7 +181,7 @@ confirmBookingBtn.addEventListener('click', ()=>{
     user: user.name,
     createdAt: new Date().toISOString()
   };
-  // Guardar en localStorage
+  
   const prev = JSON.parse(localStorage.getItem('cineReservations') || '[]');
   prev.push(reservation);
   localStorage.setItem('cineReservations', JSON.stringify(prev));
@@ -179,8 +199,8 @@ function createMovieCard(movie){
   posterWrap.className = 'poster-wrapper';
   const img = document.createElement('img');
   img.className = 'poster';
-  img.src = movie.poster;
-  img.alt = movie.title + ' — póster';
+  img.src = movie.imagen;
+  img.alt = movie.titulo + ' — póster';
   img.loading = 'lazy';
   posterWrap.appendChild(img);
 
@@ -189,33 +209,39 @@ function createMovieCard(movie){
 
   const title = document.createElement('h2');
   title.className = 'movie-title';
-  title.textContent = movie.title;
+  title.textContent = movie.titulo;
 
   const meta = document.createElement('div');
   meta.className = 'movie-meta';
-  meta.textContent = movie.duration || '';
+  meta.textContent = `${movie.genero} • ${movie.duracion}`;
+
+  // Botón para ver el trailer
+  const trailerBtn = document.createElement('button');
+  trailerBtn.type = 'button';
+  trailerBtn.className = 'btn-ver-trailer';
+  trailerBtn.innerHTML = '▶ Ver Tráiler';
+  trailerBtn.onclick = () => abrirTrailer(movie.trailerId);
 
   const showtimesList = document.createElement('ul');
   showtimesList.className = 'showtimes';
-  const times = Array.isArray(movie.showtimes) ? movie.showtimes : [];
+  const times = Array.isArray(movie.horarios) ? movie.horarios : [];
   times.forEach(t =>{
     const li = document.createElement('li');
-    // Crear botón para cada horario para permitir interacción
     const btn = document.createElement('button');
     btn.className = 'time-badge';
     btn.type = 'button';
     btn.textContent = t;
     btn.setAttribute('data-movie-id', movie.id);
-    btn.setAttribute('data-movie-title', movie.title);
+    btn.setAttribute('data-movie-title', movie.titulo);
     btn.setAttribute('data-time', t);
-    // Accesibilidad
-    btn.setAttribute('aria-label', `Reservar ${movie.title} a las ${t}`);
+    btn.setAttribute('aria-label', `Reservar ${movie.titulo} a las ${t}`);
     li.appendChild(btn);
     showtimesList.appendChild(li);
   });
 
   info.appendChild(title);
   info.appendChild(meta);
+  info.appendChild(trailerBtn);
   info.appendChild(showtimesList);
 
   card.appendChild(posterWrap);
@@ -224,18 +250,19 @@ function createMovieCard(movie){
   return card;
 }
 
-function renderMovies(movies){
+function renderMovies(moviesList){
+  if(!$movies) return;
   $movies.innerHTML = '';
-  if(!movies || movies.length === 0){
+  if(!moviesList || moviesList.length === 0){
     $movies.innerHTML = '<p>No hay películas disponibles.</p>';
     return;
   }
   const fragment = document.createDocumentFragment();
-  movies.forEach(m => fragment.appendChild(createMovieCard(m)));
+  moviesList.forEach(m => fragment.appendChild(createMovieCard(m)));
   $movies.appendChild(fragment);
 }
 
-// Delegación para clicks en botones de showtime
+// Delegación para clicks en horarios
 document.addEventListener('click', (e)=>{
   const btn = e.target.closest('.time-badge');
   if(!btn) return;
@@ -244,12 +271,8 @@ document.addEventListener('click', (e)=>{
   const time = btn.dataset.time;
   const user = getUser();
   if(!user){
-    // abrir modal de login y, al cerrar, volver a abrir booking (flujo simplificado)
     openModal(loginModal);
-    // Al iniciar sesión, abrimos automáticamente el booking para la función que se intentó
-    // Para implementarlo, añadimos un listener temporal
     const onLogin = ()=>{
-      // esperar un tick para permitir que el loginModal cierre
       setTimeout(()=> openBooking(movieId, title, time), 150);
       document.removeEventListener('cine:logged-in', onLogin);
     };
@@ -259,41 +282,7 @@ document.addEventListener('click', (e)=>{
   openBooking(movieId, title, time);
 });
 
-// Emitir un evento custom cuando el usuario inicia sesión para flujos dependientes
-const originalSetUser = setUser;
-function setUserWrapper(user){
-  originalSetUser(user);
-  const ev = new Event('cine:logged-in');
-  document.dispatchEvent(ev);
-}
-// Rebind setUser used by loginForm
-// Replace with wrapper
-window.setUser = setUserWrapper;
-
-// But ensure updateAuthView uses the same storage
-// We'll also override the login form handler to call wrapper
-loginForm.removeEventListener && loginForm.removeEventListener('submit', ()=>{});
-loginForm.addEventListener('submit', (e)=>{
-  e.preventDefault();
-  const uname = document.getElementById('username').value.trim();
-  if(!uname) return;
-  setUserWrapper({name: uname});
-  closeModal(loginModal);
-});
-
-async function loadMovies(){
-  try{
-    const resp = await fetch('/movies.json', {cache: 'no-store'});
-    if(!resp.ok) throw new Error('No hay movies.json');
-    const data = await resp.json();
-    if(Array.isArray(data) && data.length) renderMovies(data);
-    else renderMovies(sampleMovies);
-  }catch(e){
-    renderMovies(sampleMovies);
-  }
-}
-
 window.addEventListener('DOMContentLoaded', ()=>{
   updateAuthView();
-  loadMovies();
+  renderMovies(peliculas);
 });
