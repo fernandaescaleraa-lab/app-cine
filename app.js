@@ -1,27 +1,51 @@
 // app.js — Renderiza películas y horarios de forma responsiva
 // Incluye: login modal (localStorage) y booking modal con selección de cantidad y confirmación
 
-const sampleMovies = [
+const peliculas = [
   {
     id: 1,
-    title: 'La Aventura en Azul',
-    poster: 'https://picsum.photos/id/1015/600/400',
-    duration: '1h 45m',
-    showtimes: ['10:00', '12:30', '15:00', '17:30', '20:00']
+    titulo: "Spider-Man: No Way Home",
+    genero: "Acción / Superhéroes",
+    duracion: "148 min",
+    imagen: "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+    trailerId: "JfVOs4VSpmA",
+    horarios: ["15:00", "18:15", "21:30"]
   },
   {
     id: 2,
-    title: 'Noche de Estrellas',
-    poster: 'https://picsum.photos/id/1003/600/400',
-    duration: '2h 10m',
-    showtimes: ['11:15', '13:45', '16:15', '19:00']
+    titulo: "Deadpool & Wolverine",
+    genero: "Acción / Comedia",
+    duracion: "128 min",
+    imagen: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+    trailerId: "73_1biulkYk",
+    horarios: ["16:30", "19:45", "22:45"]
   },
   {
     id: 3,
-    title: 'Comedia en la Ciudad',
-    poster: 'https://picsum.photos/id/1011/600/400',
-    duration: '1h 30m',
-    showtimes: ['09:30', '11:50', '14:20', '16:50', '19:20', '21:40']
+    titulo: "Intensa-Mente 2",
+    genero: "Animación / Aventura",
+    duracion: "96 min",
+    imagen: "https://image.tmdb.org/t/p/w500/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
+    trailerId: "LEjhY15eCx0",
+    horarios: ["14:00", "16:15", "18:30"]
+  },
+  {
+    id: 4,
+    titulo: "Dune: Parte Dos",
+    genero: "Ciencia Ficción",
+    duracion: "166 min",
+    imagen: "https://image.tmdb.org/t/p/w500/czembW0Rk1Ke7lCJGahbOhdCuhV.jpg",
+    trailerId: "Way9Dexny3w",
+    horarios: ["17:00", "20:30"]
+  },
+  {
+    id: 5,
+    titulo: "Batman",
+    genero: "Acción / Crimen",
+    duracion: "176 min",
+    imagen: "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+    trailerId: "I_aEsmZZ3b8",
+    horarios: ["19:00", "22:15"]
   }
 ];
 
