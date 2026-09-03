@@ -1,106 +1,261 @@
-/* style.css — Cartelera con pósters verticales, botón de trailers y horarios */
-:root {
-  --card-gap: 1.5rem;
-  --card-padding: 0.85rem;
-  --max-card-width: 280px;
-}
-
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  margin: 0;
-  background: #0f172a; /* Fondo oscuro moderno tipo cine */
-  color: #f8fafc;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #0b0b0b;
+  color: #f1f1f1;
 }
 
-header {
-  padding: 1.25rem 1rem;
-  background: #1e293b;
-  border-bottom: 1px solid #334155;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+/* Header Cinemark */
+.main-header {
+  background-color: #121212;
+  border-bottom: 1px solid #222;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 1.4rem;
-  letter-spacing: 0.5px;
-  color: #f8fafc;
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* Botones de sesión en el header */
-#login-btn, #logout-btn {
-  background: #38bdf8;
-  color: #0f172a;
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.brand-logo {
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.brand-logo span {
+  color: #e50914;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.nav-links a {
+  color: #a3a3a3;
+  text-decoration: none;
+  font-size: 0.85rem;
   font-weight: 600;
-  border: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-links a.active, .nav-links a:hover {
+  color: #ffffff;
+}
+
+.btn-auth {
+  background: transparent;
+  border: 1px solid #444;
+  color: #fff;
   padding: 0.45rem 1rem;
-  border-radius: 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s;
 }
 
-#login-btn:hover, #logout-btn:hover {
-  background: #0ea5e9;
+.btn-auth:hover {
+  background: #fff;
+  color: #000;
 }
 
+.btn-logout {
+  border-color: #e50914;
+  color: #e50914;
+}
+
+.btn-logout:hover {
+  background: #e50914;
+  color: #fff;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #38bdf8;
+}
+
+/* Banner Hero */
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  background-image: url("https://image.tmdb.org/t/p/original/14QbnygCuTO0vl7CAFmPf1fgZfV.jpg");
+  background-size: cover;
+  background-position: center top;
+  display: flex;
+  align-items: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(11,11,11,0.95) 0%, rgba(11,11,11,0.7) 40%, rgba(11,11,11,0.2) 100%),
+              linear-gradient(0deg, #0b0b0b 0%, transparent 60%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin-left: max(1.5rem, calc((100vw - 1200px) / 2));
+  padding: 1.5rem;
+}
+
+.hero-badge {
+  background-color: #e50914;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.hero-title {
+  font-size: 2.5rem;
+  margin: 0.75rem 0;
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.hero-desc {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #d4d4d4;
+  margin-bottom: 1.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-hero-play {
+  background: #e50914;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-hero-play:hover {
+  background: #b20710;
+}
+
+.btn-hero-reserve {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 0.75rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-hero-reserve:hover {
+  background: #ffffff;
+  color: #000;
+}
+
+/* Grilla de Películas */
 .container {
   max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #222;
+  padding-bottom: 0.75rem;
+}
+
+.section-heading h2 {
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+  font-weight: 800;
+}
+
+.badge-destacado {
+  background-color: #222;
+  color: #e50914;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
 }
 
 .movies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--card-gap);
-  align-items: stretch;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1.75rem;
 }
 
 .movie-card {
-  background: #1e293b;
-  border-radius: 12px;
-  padding: var(--card-padding);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-  border: 1px solid #334155;
+  background: #161616;
+  border-radius: 8px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  max-width: var(--max-card-width);
-  margin-inline: auto;
-  width: 100%;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #242424;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .movie-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  border-color: #333;
 }
 
-/* Formato clásico vertical de póster de cine (2:3) */
 .poster-wrapper {
-  width: 100%;
   aspect-ratio: 2 / 3;
+  width: 100%;
   overflow: hidden;
-  border-radius: 8px;
-  background: #0f172a;
+  background: #202020;
 }
 
 .poster {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
-  transition: transform 0.3s ease;
-}
-
-.movie-card:hover .poster {
-  transform: scale(1.03);
 }
 
 .movie-info {
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -108,72 +263,200 @@ header h1 {
 }
 
 .movie-title {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
-  margin: 0;
-  color: #f1f5f9;
+  color: #fff;
   line-height: 1.25;
 }
 
 .movie-meta {
-  font-size: 0.85rem;
-  color: #94a3b8;
+  font-size: 0.8rem;
+  color: #888;
 }
 
-/* Botón Ver Trailer */
 .btn-ver-trailer {
-  background: #e11d48;
-  color: #ffffff;
-  border: none;
-  padding: 0.45rem 0.8rem;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.85rem;
+  background: transparent;
+  color: #e50914;
+  border: 1px solid #e50914;
+  padding: 0.4rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.8rem;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
   margin-top: 0.25rem;
-  transition: background 0.2s ease;
+  transition: all 0.2s;
 }
 
 .btn-ver-trailer:hover {
-  background: #be123c;
+  background: #e50914;
+  color: #fff;
 }
 
 .showtimes {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin: 0.4rem 0 0 0;
-  padding: 0;
+  margin-top: 0.5rem;
   list-style: none;
 }
 
 .time-badge {
-  background: #334155;
-  color: #38bdf8;
-  border: 1px solid #475569;
-  padding: 0.35rem 0.6rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
+  background: #262626;
+  color: #ddd;
+  border: 1px solid #383838;
+  padding: 0.35rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.2s ease;
+  transition: background 0.2s, color 0.2s;
 }
 
 .time-badge:hover {
-  background: #38bdf8;
-  color: #0f172a;
+  background: #fff;
+  color: #000;
+}
+
+/* Modales */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+}
+
+.modal-panel {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #1c1c1c;
+  color: #fff;
+  padding: 1.75rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 360px;
+  border: 1px solid #333;
+}
+
+.modal-close {
+  float: right;
+  background: transparent;
+  border: none;
+  color: #888;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.modal-close:hover { color: #fff; }
+
+.modal-panel input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.qty-field {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qty-field input {
+  width: 70px;
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background: #e50914;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background: #333;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Modal Trailer */
+.trailer-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+
+.trailer-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.btn-cerrar-trailer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.trailer-iframe-box {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.trailer-iframe-box iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 footer {
-  padding: 2rem 1rem;
   text-align: center;
-  color: #64748b;
-  font-size: 0.9rem;
-  border-top: 1px solid #1e293b;
-  margin-top: 2rem;
+  padding: 2.5rem 1rem;
+  color: #666;
+  font-size: 0.85rem;
+  border-top: 1px solid #1c1c1c;
 }
