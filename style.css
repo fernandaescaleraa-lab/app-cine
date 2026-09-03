@@ -1,88 +1,179 @@
-/* style.css — Corrección de tamaño de posters y visualización de horarios */
-:root{
-  --card-gap: 1rem;
-  --card-padding: 0.75rem;
-  --poster-aspect: calc(3/2); /* relación ancho/alto aproximada (3:2) */
-  --max-card-width: 320px;
+/* style.css — Cartelera con pósters verticales, botón de trailers y horarios */
+:root {
+  --card-gap: 1.5rem;
+  --card-padding: 0.85rem;
+  --max-card-width: 280px;
 }
 
-*{box-sizing:border-box}
-body{
+* {
+  box-sizing: border-box;
+}
+
+body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  margin:0;
-  background:#f6f7fb;
-  color:#111;
-}
-header{padding:1rem;background:#0b3d91;color:white}
-header h1{margin:0;font-size:1.25rem}
-.container{max-width:1100px;margin:1.25rem auto;padding:0 1rem}
-
-.movies-grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap:var(--card-gap);
-  align-items:start;
+  margin: 0;
+  background: #0f172a; /* Fondo oscuro moderno tipo cine */
+  color: #f8fafc;
 }
 
-.movie-card{
-  background:white;
-  border-radius:8px;
-  padding:var(--card-padding);
-  box-shadow:0 1px 4px rgba(16,24,40,0.06);
-  display:flex;
-  flex-direction:column;
-  gap:0.5rem;
-  max-width:var(--max-card-width);
-  margin-inline:auto;
+header {
+  padding: 1.25rem 1rem;
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.poster-wrapper{
-  width:100%;
-  /* Mantener ratio consistente sin deformar la imagen */
-  aspect-ratio: 3 / 2; /* mejor que fijar height explícito */
-  overflow:hidden;
-  border-radius:6px;
-  background:linear-gradient(180deg,#e6eefc,#f8fbff);
+header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  color: #f8fafc;
 }
 
-.poster{
-  width:100%;
-  height:100%;
-  object-fit:cover; /* mantiene el recorte y evita estirado */
-  display:block;
+/* Botones de sesión en el header */
+#login-btn, #logout-btn {
+  background: #38bdf8;
+  color: #0f172a;
+  font-weight: 600;
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-.movie-info{display:flex;flex-direction:column;gap:0.5rem}
-.movie-title{font-size:1rem;margin:0}
-.movie-meta{font-size:0.9rem;color:#555}
-
-.showtimes{
-  display:flex;
-  flex-wrap:wrap; /* permite que los horarios pasen a la siguiente línea cuando hace falta */
-  gap:0.4rem;
-  margin:0;
-  padding:0;
-  list-style:none;
+#login-btn:hover, #logout-btn:hover {
+  background: #0ea5e9;
 }
 
-.time-badge{
-  background:#eef3ff;
-  color:#08306b;
-  padding:0.35rem 0.55rem;
-  border-radius:999px;
-  font-size:0.85rem;
-  white-space:nowrap; /* cada badge no se corta internamente */
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
 }
 
-/* En pantallas pequeñas, permitir scroll horizontal en caso de que haya muchas franjas */
-@media (max-width:420px){
-  .showtimes{overflow:auto;gap:0.5rem}
-  .showtimes::-webkit-scrollbar{height:8px}
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--card-gap);
+  align-items: stretch;
 }
 
-footer{padding:1rem;text-align:center;color:#666;font-size:0.9rem}
+.movie-card {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: var(--card-padding);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  border: 1px solid #334155;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: var(--max-card-width);
+  margin-inline: auto;
+  width: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-/* Pequeños ajustes visuales */
-@media (min-width:900px){
-  .movies-grid{grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));}
+.movie-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Formato clásico vertical de póster de cine (2:3) */
+.poster-wrapper {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #0f172a;
+}
+
+.poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover .poster {
+  transform: scale(1.03);
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.movie-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  color: #f1f5f9;
+  line-height: 1.25;
+}
+
+.movie-meta {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+/* Botón Ver Trailer */
+.btn-ver-trailer {
+  background: #e11d48;
+  color: #ffffff;
+  border: none;
+  padding: 0.45rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+  transition: background 0.2s ease;
+}
+
+.btn-ver-trailer:hover {
+  background: #be123c;
+}
+
+.showtimes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.4rem 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.time-badge {
+  background: #334155;
+  color: #38bdf8;
+  border: 1px solid #475569;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.time-badge:hover {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+footer {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.9rem;
+  border-top: 1px solid #1e293b;
+  margin-top: 2rem;
 }
