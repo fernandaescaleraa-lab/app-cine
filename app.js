@@ -4,6 +4,7 @@ const peliculas = [
     titulo: "Spider-Man: No Way Home",
     genero: "Acción / Superhéroes",
     duracion: "148 min",
+    sinopsis: "Tras revelarse su identidad secreta, Peter Parker recurre al Doctor Strange para restaurar su anonimato, pero el hechizo fractura el multiverso liberando a peligrosos villanos.",
     imagen: "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
     trailerId: "JfVOs4VSpmA",
     horarios: ["15:00", "18:15", "21:30"]
@@ -13,6 +14,7 @@ const peliculas = [
     titulo: "Deadpool & Wolverine",
     genero: "Acción / Comedia",
     duracion: "128 min",
+    sinopsis: "Wade Wilson lleva una vida tranquila hasta que la Time Variance Authority lo recluta para una misión existencial que lo obligará a formar una dupla explosiva con Wolverine.",
     imagen: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
     trailerId: "73_1biulkYk",
     horarios: ["16:30", "19:45", "22:45"]
@@ -22,6 +24,7 @@ const peliculas = [
     titulo: "Intensa-Mente 2",
     genero: "Animación / Aventura",
     duracion: "96 min",
+    sinopsis: "Riley entra en la adolescencia y el cuartel general experimenta una repentina demolición para dar lugar a nuevas emociones inesperadas, lideradas por Ansiedad.",
     imagen: "https://image.tmdb.org/t/p/w500/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
     trailerId: "LEjhY15eCx0",
     horarios: ["14:00", "16:15", "18:30"]
@@ -31,6 +34,7 @@ const peliculas = [
     titulo: "Dune: Parte Dos",
     genero: "Ciencia Ficción",
     duracion: "166 min",
+    sinopsis: "Paul Atreides se une a Chani y a los Fremen mientras busca venganza contra los conspiradores que destruyeron a su familia, enfrentando una difícil elección para evitar un futuro trágico.",
     imagen: "https://image.tmdb.org/t/p/w500/czembW0Rk1Ke7lCJGahbOhdCuhV.jpg",
     trailerId: "Way9Dexny3w",
     horarios: ["17:00", "20:30"]
@@ -40,6 +44,7 @@ const peliculas = [
     titulo: "Batman",
     genero: "Acción / Crimen",
     duracion: "176 min",
+    sinopsis: "En su segundo año luchando contra el crimen, Batman persigue al asesino serial Riddler, desentrañando una oscura red de corrupción ligada al pasado de Gotham y de su propia familia.",
     imagen: "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",
     trailerId: "I_aEsmZZ3b8",
     horarios: ["19:00", "22:15"]
@@ -188,7 +193,7 @@ if (confirmBookingBtn) {
   });
 }
 
-// Renderizado de Tarjetas
+// Renderizado de Tarjetas con Sinopsis
 function createMovieCard(movie) {
   const card = document.createElement('article');
   card.className = 'movie-card';
@@ -212,6 +217,11 @@ function createMovieCard(movie) {
   const meta = document.createElement('div');
   meta.className = 'movie-meta';
   meta.textContent = `${movie.genero} • ${movie.duracion}`;
+
+  // Párrafo de sinopsis
+  const sinopsis = document.createElement('p');
+  sinopsis.className = 'movie-sinopsis';
+  sinopsis.textContent = movie.sinopsis;
 
   const trailerBtn = document.createElement('button');
   trailerBtn.type = 'button';
@@ -237,6 +247,7 @@ function createMovieCard(movie) {
 
   info.appendChild(title);
   info.appendChild(meta);
+  info.appendChild(sinopsis);
   info.appendChild(trailerBtn);
   info.appendChild(showtimesList);
 
