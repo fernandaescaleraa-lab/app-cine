@@ -140,8 +140,7 @@ window.abrirTrailer = function(trailerId) {
   const modal = document.getElementById("modal-trailer");
   const iframe = document.getElementById("iframe-trailer");
   if(modal && iframe){
-    iframe.src = `https://www.youtube.com/embed/${trailerId}?autoplay=1`;
-    modal.classList.remove("hidden");
+    iframe.src = `https://www.youtube-nocookie.com/embed/${trailerId}?autoplay=1&rel=0`;
     modal.style.display = 'flex';
   }
 };
@@ -151,7 +150,6 @@ window.cerrarTrailer = function() {
   const iframe = document.getElementById("iframe-trailer");
   if(modal && iframe){
     iframe.src = "";
-    modal.classList.add("hidden");
     modal.style.display = 'none';
   }
 };
@@ -172,7 +170,7 @@ confirmBookingBtn.addEventListener('click', ()=>{
     openModal(loginModal);
     return;
   }
-  const qty = Math.max(1, Math.min(10, parseInt(qtyInput.value || '1',10)));
+  const qty = Math.max(1, Math.min(10, parseInt(qtyInput.value || '1', 10)));
   const reservation = {
     movieId: currentBooking.movieId,
     title: currentBooking.title,
@@ -266,7 +264,7 @@ function renderMovies(moviesList){
 document.addEventListener('click', (e)=>{
   const btn = e.target.closest('.time-badge');
   if(!btn) return;
-  const movieId = parseInt(btn.dataset.movieId,10);
+  const movieId = parseInt(btn.dataset.movieId, 10);
   const title = btn.dataset.movieTitle;
   const time = btn.dataset.time;
   const user = getUser();
