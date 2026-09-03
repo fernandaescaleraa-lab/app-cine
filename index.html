@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Cine App — Cartelera</title>
+  <title>Cinema App — Cartelera</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Barra superior estilo Cinemark -->
+  <!-- Header -->
   <header class="main-header">
     <div class="header-container">
       <div class="header-left">
         <a href="#" class="brand-logo">CINEMA<span>APP</span></a>
         <nav class="nav-links">
           <a href="#cartelera" class="active">Cartelera</a>
-          <a href="#">Candy</a>
+          <a href="#">Candy Bar</a>
           <a href="#">Promociones</a>
         </nav>
       </div>
@@ -34,10 +34,10 @@
     <div class="hero-content">
       <span class="hero-badge">ESTRENO DESTACADO</span>
       <h1 class="hero-title">Spider-Man: No Way Home</h1>
-      <p class="hero-desc">Por primera vez en la historia cinematográfica de Spider-Man, nuestro amigable vecino y héroe es desenmascarado y ya no puede separar su vida normal de los enormes riesgos de ser un superhéroe.</p>
+      <p class="hero-desc">Por primera vez en la historia cinematográfica de Spider-Man, nuestro amigable héroe es desenmascarado y ya no puede separar su vida normal de los riesgos de ser un superhéroe.</p>
       <div class="hero-actions">
         <button class="btn-hero-play" onclick="abrirTrailer('JfVOs4VSpmA')">▶ Ver Tráiler</button>
-        <button class="btn-hero-reserve" onclick="openBooking(1, 'Spider-Man: No Way Home', '21:30')">Reservar Entrada</button>
+        <button class="btn-hero-reserve" onclick="abrirButacas(1, 'Spider-Man: No Way Home', '21:30')">Elegir Butacas</button>
       </div>
     </div>
   </section>
@@ -50,19 +50,70 @@
     </div>
     
     <section id="movies" class="movies-grid" aria-live="polite">
-      <!-- Las tarjetas se inyectan automáticamente desde app.js -->
+      <!-- Inyectado desde app.js -->
     </section>
   </main>
 
   <footer>
-    <p>© 2026 Cinema App — Proyecto Web Interactivo</p>
+    <p>© 2026 Cinema App — Tu cine favorito online</p>
   </footer>
 
-  <!-- Login Modal -->
+  <!-- Modal Selector de Butacas -->
+  <div id="modal-butacas" class="modal-butacas-overlay" style="display:none;">
+    <div class="butacas-window">
+      <div class="butacas-header">
+        <button type="button" class="btn-volver" onclick="cerrarButacas()">← Volver a Cartelera</button>
+      </div>
+
+      <div class="butacas-layout">
+        <!-- Mapa de la Sala -->
+        <div class="sala-mapa">
+          <div class="pantalla-curva"></div>
+          <p class="pantalla-label">PANTALLA</p>
+
+          <div id="sala-grid" class="asientos-grid">
+            <!-- Butacas -->
+          </div>
+
+          <!-- Leyenda -->
+          <div class="sala-leyenda">
+            <span class="leyenda-item"><span class="muestra libre"></span> Disponible ($5.000)</span>
+            <span class="leyenda-item"><span class="muestra seleccionada"></span> Tu Selección</span>
+            <span class="leyenda-item"><span class="muestra ocupada">✕</span> Ocupado</span>
+          </div>
+        </div>
+
+        <!-- Panel Lateral de Resumen -->
+        <div class="resumen-panel">
+          <h3>Resumen de Sala</h3>
+          <div class="resumen-dato">
+            <span class="label">PELÍCULA</span>
+            <strong id="res-pelicula">Título</strong>
+          </div>
+          <div class="resumen-dato">
+            <span class="label">FUNCIÓN</span>
+            <strong id="res-funcion">Horario</strong>
+          </div>
+          <div class="resumen-dato">
+            <span class="label">BUTACAS SELECCIONADAS</span>
+            <p id="res-asientos-lista" class="asientos-texto">Ninguna seleccionada</p>
+            <span id="res-cantidad" class="sub-cantidad">0 butacas seleccionadas</span>
+          </div>
+          <div class="resumen-dato total-dato">
+            <span class="label">SUBTOTAL ENTRADAS</span>
+            <div id="res-total" class="monto-total">$0</div>
+          </div>
+          <button id="btn-confirmar-butacas" type="button" class="btn-continuar" onclick="confirmarCompra()">Confirmar Reserva →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Login -->
   <div id="login-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;">
     <div class="modal-backdrop" data-action="close"></div>
     <div class="modal-panel">
-      <button class="modal-close" data-action="close" aria-label="Cerrar">✕</button>
+      <button type="button" class="modal-close" data-action="close" aria-label="Cerrar">✕</button>
       <h3>Iniciar sesión</h3>
       <form id="login-form">
         <label for="username">Nombre de usuario</label>
@@ -75,27 +126,7 @@
     </div>
   </div>
 
-  <!-- Booking Modal -->
-  <div id="booking-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;">
-    <div class="modal-backdrop" data-action="close"></div>
-    <div class="modal-panel">
-      <button class="modal-close" data-action="close" aria-label="Cerrar">✕</button>
-      <h3 id="booking-title">Reservar entrada</h3>
-      <p id="booking-subtitle" class="booking-subtitle"></p>
-      
-      <div class="qty-field">
-        <label for="qty">Cantidad de entradas:</label>
-        <input id="qty" type="number" min="1" max="10" value="1">
-      </div>
-
-      <div class="modal-actions">
-        <button type="button" data-action="cancel" class="btn-secondary">Cancelar</button>
-        <button id="confirm-booking" type="button" class="btn-primary">Confirmar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Trailer Modal -->
+  <!-- Modal Trailer -->
   <div id="modal-trailer" class="trailer-modal" style="display:none;">
     <div class="trailer-container">
       <button type="button" class="btn-cerrar-trailer" onclick="cerrarTrailer()">✕</button>
