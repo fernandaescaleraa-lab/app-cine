@@ -3,43 +3,73 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>App Cine</title>
+  <title>Cine App — Cartelera</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;">
-      <h1>Cartelera</h1>
-      <div>
-        <button id="login-btn" aria-haspopup="dialog">Iniciar sesión</button>
-        <button id="logout-btn" style="display:none;">Cerrar sesión</button>
-        <span id="user-greeting" style="margin-left:0.75rem;color:#fff;font-weight:600;display:none;"></span>
+  <!-- Barra superior estilo Cinemark -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="header-left">
+        <a href="#" class="brand-logo">CINEMA<span>APP</span></a>
+        <nav class="nav-links">
+          <a href="#cartelera" class="active">Cartelera</a>
+          <a href="#">Candy</a>
+          <a href="#">Promociones</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <button id="login-btn" class="btn-auth" aria-haspopup="dialog">Iniciar sesión</button>
+        <div id="user-logged-box" style="display:none; align-items:center; gap:0.75rem;">
+          <span id="user-greeting" class="user-name"></span>
+          <button id="logout-btn" class="btn-auth btn-logout">Cerrar sesión</button>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="container">
+  <!-- Banner Hero Destacado -->
+  <section class="hero-banner">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-badge">ESTRENO DESTACADO</span>
+      <h1 class="hero-title">Spider-Man: No Way Home</h1>
+      <p class="hero-desc">Por primera vez en la historia cinematográfica de Spider-Man, nuestro amigable vecino y héroe es desenmascarado y ya no puede separar su vida normal de los enormes riesgos de ser un superhéroe.</p>
+      <div class="hero-actions">
+        <button class="btn-hero-play" onclick="abrirTrailer('JfVOs4VSpmA')">▶ Ver Tráiler</button>
+        <button class="btn-hero-reserve" onclick="openBooking(1, 'Spider-Man: No Way Home', '21:30')">Reservar Entrada</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cartelera General -->
+  <main class="container" id="cartelera">
+    <div class="section-heading">
+      <h2>PELÍCULAS EN CARTELERA</h2>
+      <span class="badge-destacado">TODAS LAS SALAS</span>
+    </div>
+    
     <section id="movies" class="movies-grid" aria-live="polite">
-      <!-- Las tarjetas de películas se inyectan desde app.js -->
+      <!-- Las tarjetas se inyectan automáticamente desde app.js -->
     </section>
   </main>
 
   <footer>
-    <p>App Cine — Ejemplo</p>
+    <p>© 2026 Cinema App — Proyecto Web Interactivo</p>
   </footer>
 
   <!-- Login Modal -->
   <div id="login-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;">
-    <div class="modal-backdrop" data-action="close" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);"></div>
-    <div class="modal-panel" role="document" style="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:1rem;border-radius:8px;min-width:280px;box-shadow:0 6px 24px rgba(0,0,0,0.2);">
-      <button class="modal-close" data-action="close" aria-label="Cerrar" style="float:right;border:0;background:transparent;font-size:1rem;">✕</button>
+    <div class="modal-backdrop" data-action="close"></div>
+    <div class="modal-panel">
+      <button class="modal-close" data-action="close" aria-label="Cerrar">✕</button>
       <h3>Iniciar sesión</h3>
       <form id="login-form">
         <label for="username">Nombre de usuario</label>
-        <input id="username" name="username" required style="width:100%;padding:0.5rem;margin-top:0.25rem;margin-bottom:0.5rem;" />
-        <div style="display:flex;justify-content:flex-end;gap:0.5rem;">
-          <button type="button" data-action="cancel">Cancelar</button>
-          <button type="submit">Entrar</button>
+        <input id="username" name="username" placeholder="Ingresá tu nombre" required />
+        <div class="modal-actions">
+          <button type="button" data-action="cancel" class="btn-secondary">Cancelar</button>
+          <button type="submit" class="btn-primary">Entrar</button>
         </div>
       </form>
     </div>
@@ -47,26 +77,30 @@
 
   <!-- Booking Modal -->
   <div id="booking-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;">
-    <div class="modal-backdrop" data-action="close" style="position:fixed;inset:0;background:rgba(0,0,0,0.4);"></div>
-    <div class="modal-panel" role="document" style="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:1rem;border-radius:8px;min-width:300px;box-shadow:0 6px 24px rgba(0,0,0,0.2);">
-      <button class="modal-close" data-action="close" aria-label="Cerrar" style="float:right;border:0;background:transparent;font-size:1rem;">✕</button>
+    <div class="modal-backdrop" data-action="close"></div>
+    <div class="modal-panel">
+      <button class="modal-close" data-action="close" aria-label="Cerrar">✕</button>
       <h3 id="booking-title">Reservar entrada</h3>
-      <p id="booking-subtitle" style="margin-top:0.25rem;color:#444;font-size:0.95rem;"></p>
-      <label for="qty">Cantidad</label>
-      <input id="qty" type="number" min="1" max="10" value="1" style="width:5rem;margin-left:0.5rem;">
-      <div style="display:flex;justify-content:flex-end;gap:0.5rem;margin-top:0.75rem;">
-        <button type="button" data-action="cancel">Cancelar</button>
-        <button id="confirm-booking" type="button">Confirmar reserva</button>
+      <p id="booking-subtitle" class="booking-subtitle"></p>
+      
+      <div class="qty-field">
+        <label for="qty">Cantidad de entradas:</label>
+        <input id="qty" type="number" min="1" max="10" value="1">
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" data-action="cancel" class="btn-secondary">Cancelar</button>
+        <button id="confirm-booking" type="button" class="btn-primary">Confirmar</button>
       </div>
     </div>
   </div>
 
   <!-- Trailer Modal -->
-  <div id="modal-trailer" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;align-items:center;justify-content:center;padding:1rem;">
-    <div style="position:relative;width:100%;max-width:800px;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.8);">
-      <button type="button" onclick="cerrarTrailer()" style="position:absolute;top:10px;right:10px;background:rgba(0,0,0,0.7);color:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;z-index:10;display:flex;align-items:center;justify-content:center;">✕</button>
-      <div style="position:relative;padding-bottom:56.25%;height:0;">
-        <iframe id="iframe-trailer" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div id="modal-trailer" class="trailer-modal" style="display:none;">
+    <div class="trailer-container">
+      <button type="button" class="btn-cerrar-trailer" onclick="cerrarTrailer()">✕</button>
+      <div class="trailer-iframe-box">
+        <iframe id="iframe-trailer" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
   </div>
