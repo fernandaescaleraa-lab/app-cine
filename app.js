@@ -1,122 +1,61 @@
+const PRECIO_ENTRADA = 5000;
+
 const peliculas = [
   {
     id: 1,
     titulo: "Spider-Man: No Way Home",
     genero: "Acción / Superhéroes",
-    duracion: "2h 28m",
-    sinopsis: "Peter Parker enfrenta las consecuencias de la exposición de su identidad y debe lidiar con amenazas multidimensionales mientras protege a sus seres queridos.",
-    imagen: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900">
-        <rect width="100%" height="100%" fill="#0b1220"/>
-        <g transform="translate(40,110)">
-          <rect width="520" height="680" rx="36" fill="#071540" stroke="#06243f" stroke-width="6"/>
-          <text x="260" y="120" font-family="Inter, Arial, sans-serif" font-size="22" fill="#ffffff" font-weight="800" text-anchor="middle">SPIDER-MAN</text>
-          <text x="260" y="150" font-family="Inter, Arial, sans-serif" font-size="14" fill="#9fbbe6" text-anchor="middle">NO WAY HOME</text>
-          <circle cx="300" cy="360" r="110" fill="#ff3b3b" opacity="0.9" />
-          <text x="300" y="365" font-family="Georgia, serif" font-size="20" fill="#08101a" font-weight="800" text-anchor="middle">🕷️</text>
-          <text x="260" y="760" font-family="Inter, Arial, sans-serif" font-size="12" fill="#cfe7ff" text-anchor="middle">Acción • 2h 28m</text>
-        </g>
-      </svg>
-    `),
+    duracion: "148 min",
+    sinopsis: "Tras revelarse su identidad secreta, Peter Parker recurre al Doctor Strange para restaurar su anonimato, pero el hechizo fractura el multiverso liberando a peligrosos villanos.",
+    imagen: "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
     trailerId: "JfVOs4VSpmA",
-    horarios: ["13:00", "16:20", "19:40"]
+    horarios: ["15:00", "18:15", "21:30"]
   },
   {
     id: 2,
     titulo: "Deadpool & Wolverine",
     genero: "Acción / Comedia",
-    duracion: "2h 03m",
-    sinopsis: "Deadpool y Wolverine se encuentran en una aventura violenta y explosiva llena de humor irreverente, caos y dinámicas inesperadas entre antihéroes.",
-    imagen: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900">
-        <rect width="100%" height="100%" fill="#0b0b0d"/>
-        <g transform="translate(40,110)">
-          <rect width="520" height="680" rx="36" fill="#200009" stroke="#3b0b12" stroke-width="6"/>
-          <text x="260" y="120" font-family="Inter, Arial, sans-serif" font-size="20" fill="#ffdede" font-weight="800" text-anchor="middle">DEADPOOL &amp;</text>
-          <text x="260" y="150" font-family="Inter, Arial, sans-serif" font-size="18" fill="#ffdede" text-anchor="middle">WOLVERINE</text>
-          <g transform="translate(190,300)">
-            <rect x="0" y="0" width="240" height="240" rx="20" fill="#ff5050" />
-            <text x="120" y="140" font-size="48" font-family="Georgia, serif" fill="#2b0707" font-weight="900" text-anchor="middle">✖</text>
-          </g>
-          <text x="260" y="760" font-family="Inter, Arial, sans-serif" font-size="12" fill="#f6cfcf" text-anchor="middle">Acción • 2h 03m</text>
-        </g>
-      </svg>
-    `),
-    trailerId: "dQw4w9WgXcQ",
-    horarios: ["14:30", "17:50", "21:10"]
+    duracion: "128 min",
+    sinopsis: "Wade Wilson lleva una vida tranquila hasta que la Time Variance Authority lo recluta para una misión existencial que lo obligará a formar una dupla explosiva con Wolverine.",
+    imagen: "https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+    trailerId: "73_1biulkYk",
+    horarios: ["16:30", "19:45", "22:45"]
   },
   {
     id: 3,
     titulo: "Intensa-Mente 2",
-    genero: "Animación / Familia",
-    duracion: "1h 48m",
-    sinopsis: "Una nueva aventura dentro de la mente que explora emociones más complejas y el crecimiento personal a través de recuerdos y sentimientos coloridos.",
-    imagen: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900">
-        <rect width="100%" height="100%" fill="#071226"/>
-        <g transform="translate(40,110)">
-          <rect width="520" height="680" rx="36" fill="#0a2540" stroke="#092a4a" stroke-width="6"/>
-          <text x="260" y="120" font-family="Inter, Arial, sans-serif" font-size="20" fill="#fff8d6" font-weight="800" text-anchor="middle">INTENSA-MENTE</text>
-          <text x="260" y="150" font-family="Inter, Arial, sans-serif" font-size="14" fill="#ffd77a" text-anchor="middle">2</text>
-          <circle cx="300" cy="380" r="90" fill="#ffcc4d" />
-          <circle cx="230" cy="420" r="40" fill="#66d3ff" />
-          <circle cx="370" cy="420" r="40" fill="#ff7ab6" />
-          <text x="260" y="760" font-family="Inter, Arial, sans-serif" font-size="12" fill="#cfe7ff" text-anchor="middle">Animación • 1h 48m</text>
-        </g>
-      </svg>
-    `),
-    trailerId: "5PSNL1qE6VY",
-    horarios: ["11:00", "13:30", "16:00"]
+    genero: "Animación / Aventura",
+    duracion: "96 min",
+    sinopsis: "Riley entra en la adolescencia y el cuartel general experimenta una repentina demolición para dar lugar a nuevas emociones inesperadas, lideradas por Ansiedad.",
+    imagen: "https://image.tmdb.org/t/p/w500/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
+    trailerId: "LEjhY15eCx0",
+    horarios: ["14:00", "16:15", "18:30"]
   },
   {
     id: 4,
     titulo: "Dune: Parte Dos",
-    genero: "Ciencia ficción / Aventura",
-    duracion: "2h 45m",
-    sinopsis: "La épica continuación en Arrakis: alianzas, batallas y el destino del universo convergen en una historia visualmente imponente.",
-    imagen: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900">
-        <rect width="100%" height="100%" fill="#07100b"/>
-        <g transform="translate(40,110)">
-          <rect width="520" height="680" rx="36" fill="#1a1a12" stroke="#332b1a" stroke-width="6"/>
-          <text x="260" y="120" font-family="Inter, Arial, sans-serif" font-size="18" fill="#f0e6cf" font-weight="800" text-anchor="middle">DUNE</text>
-          <text x="260" y="150" font-family="Inter, Arial, sans-serif" font-size="14" fill="#d6c59f" text-anchor="middle">PARTE DOS</text>
-          <rect x="150" y="300" width="300" height="160" rx="12" fill="#cc9a4d" opacity="0.9"/>
-          <text x="300" y="380" font-family="Georgia, serif" font-size="40" fill="#241b0d" font-weight="900" text-anchor="middle">☼</text>
-          <text x="260" y="760" font-family="Inter, Arial, sans-serif" font-size="12" fill="#e8d9b3" text-anchor="middle">Ciencia ficción • 2h 45m</text>
-        </g>
-      </svg>
-    `),
-    trailerId: "8g18jFHCLXk",
-    horarios: ["12:15", "18:00", "21:45"]
+    genero: "Ciencia Ficción",
+    duracion: "166 min",
+    sinopsis: "Paul Atreides se une a Chani y a los Fremen mientras busca venganza contra los conspiradores que destruyeron a su familia, enfrentando una difícil elección para evitar un futuro trágico.",
+    imagen: "https://image.tmdb.org/t/p/w500/czembW0Rk1Ke7lCJGahbOhdCuhV.jpg",
+    trailerId: "Way9Dexny3w",
+    horarios: ["17:00", "20:30"]
   },
   {
     id: 5,
     titulo: "Batman",
-    genero: "Acción / Thriller",
-    duracion: "2h 56m",
-    sinopsis: "Una oscura revisión del mito del caballero de la noche: misterio, corrupción en la ciudad y una investigación que desvela secretos peligrosos.",
-    imagen: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900">
-        <rect width="100%" height="100%" fill="#03040a"/>
-        <g transform="translate(40,110)">
-          <rect width="520" height="680" rx="36" fill="#05060b" stroke="#0b0b0b" stroke-width="6"/>
-          <text x="260" y="120" font-family="Inter, Arial, sans-serif" font-size="22" fill="#f6eec9" font-weight="900" text-anchor="middle">BATMAN</text>
-          <ellipse cx="300" cy="380" rx="110" ry="70" fill="#ffd54f" opacity="0.95"/>
-          <text x="300" y="395" font-family="Georgia, serif" font-size="36" fill="#0b0b0b" font-weight="900" text-anchor="middle">🦇</text>
-          <text x="260" y="760" font-family="Inter, Arial, sans-serif" font-size="12" fill="#dcd6ad" text-anchor="middle">Acción • 2h 56m</text>
-        </g>
-      </svg>
-    `),
-    trailerId: "z_7OV2y1Eak",
-    horarios: ["15:45", "20:10", "23:30"]
+    genero: "Acción / Crimen",
+    duracion: "176 min",
+    sinopsis: "En su segundo año luchando contra el crimen, Batman persigue al asesino serial Riddler, desentrañando una oscura red de corrupción ligada al pasado de Gotham y de su propia familia.",
+    imagen: "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+    trailerId: "I_aEsmZZ3b8",
+    horarios: ["19:00", "22:15"]
   }
 ];
 
-
 const $movies = document.getElementById('movies');
 
-// Elementos Auth
+// Auth elements
 const loginModal = document.getElementById('login-modal');
 const loginForm = document.getElementById('login-form');
 const loginBtn = document.getElementById('login-btn');
@@ -124,40 +63,21 @@ const logoutBtn = document.getElementById('logout-btn');
 const userLoggedBox = document.getElementById('user-logged-box');
 const userGreeting = document.getElementById('user-greeting');
 
-// Elementos Booking
-const bookingModal = document.getElementById('booking-modal');
-const bookingTitle = document.getElementById('booking-title');
-const bookingSubtitle = document.getElementById('booking-subtitle');
-const qtyInput = document.getElementById('qty');
-const confirmBookingBtn = document.getElementById('confirm-booking');
+// Butacas elements
+const modalButacas = document.getElementById('modal-butacas');
+const salaGrid = document.getElementById('sala-grid');
+const resPelicula = document.getElementById('res-pelicula');
+const resFuncion = document.getElementById('res-funcion');
+const resAsientosLista = document.getElementById('res-asientos-lista');
+const resCantidad = document.getElementById('res-cantidad');
+const resTotal = document.getElementById('res-total');
 
-let currentBooking = null;
+let reservaActual = null;
 
-// Funciones de Modales
-function openModal(modal) {
-  if (!modal) return;
-  modal.style.display = 'block';
-  modal.setAttribute('aria-hidden', 'false');
-}
-
-function closeModal(modal) {
-  if (!modal) return;
-  modal.style.display = 'none';
-  modal.setAttribute('aria-hidden', 'true');
-}
-
-document.addEventListener('click', (e) => {
-  if (e.target.matches('[data-action="close"]') || e.target.matches('[data-action="cancel"]')) {
-    const modal = e.target.closest('.modal');
-    if (modal) closeModal(modal);
-  }
-});
-
-// Manejo de Sesión
+// --- AUTH & STORAGE ---
 function getUser() {
-  try {
-    return JSON.parse(localStorage.getItem('cineUser')) || null;
-  } catch (e) { return null; }
+  try { return JSON.parse(localStorage.getItem('cineUser')) || null; }
+  catch (e) { return null; }
 }
 
 function setUser(user) {
@@ -183,26 +103,29 @@ function updateAuthView() {
   }
 }
 
-if (loginBtn) loginBtn.addEventListener('click', () => openModal(loginModal));
+if (loginBtn) loginBtn.addEventListener('click', () => loginModal.style.display = 'block');
 if (logoutBtn) logoutBtn.addEventListener('click', () => { clearUser(); alert('Sesión cerrada'); });
-
-function setUserWrapper(user) {
-  setUser(user);
-  const ev = new Event('cine:logged-in');
-  document.dispatchEvent(ev);
-}
 
 if (loginForm) {
   loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const uname = document.getElementById('username').value.trim();
     if (!uname) return;
-    setUserWrapper({ name: uname });
-    closeModal(loginModal);
+    setUser({ name: uname });
+    loginModal.style.display = 'none';
+    if (reservaActual) {
+      modalButacas.style.display = 'flex';
+    }
   });
 }
 
-// Manejo del Trailer Modal
+document.addEventListener('click', (e) => {
+  if (e.target.matches('[data-action="close"]') || e.target.matches('[data-action="cancel"]')) {
+    loginModal.style.display = 'none';
+  }
+});
+
+// --- TRAILER MODAL ---
 window.abrirTrailer = function(trailerId) {
   const modal = document.getElementById("modal-trailer");
   const iframe = document.getElementById("iframe-trailer");
@@ -221,42 +144,145 @@ window.cerrarTrailer = function() {
   }
 };
 
-// Reserva
-window.openBooking = function(movieId, title, time) {
-  currentBooking = { movieId, title, time };
-  bookingTitle.textContent = `Reservar: ${title}`;
-  bookingSubtitle.textContent = `Función seleccionada: ${time} hs`;
-  qtyInput.value = 1;
-  openModal(bookingModal);
+// --- LOGICA DE BUTACAS ---
+const FILAS = ['A', 'B', 'C', 'D', 'E'];
+const COLUMNAS = [1, 2, 3, 4, 5, 6, 7, 8];
+
+function getOcupadas(movieId, time) {
+  const key = `ocupadas_${movieId}_${time}`;
+  let ocupadas = JSON.parse(localStorage.getItem(key));
+  if (!ocupadas) {
+    ocupadas = ['A2', 'A3', 'B1', 'B5', 'C3', 'C7', 'D4', 'E2'];
+    localStorage.setItem(key, JSON.stringify(ocupadas));
+  }
+  return ocupadas;
+}
+
+window.abrirButacas = function(movieId, title, time) {
+  const user = getUser();
+  if (!user) {
+    reservaActual = { movieId, title, time, butacas: [] };
+    loginModal.style.display = 'block';
+    return;
+  }
+
+  reservaActual = { movieId, title, time, butacas: [] };
+  resPelicula.textContent = title;
+  resFuncion.textContent = `${time} hs`;
+  actualizarResumen();
+
+  dibujarSala(movieId, time);
+  modalButacas.style.display = 'flex';
 };
 
-if (confirmBookingBtn) {
-  confirmBookingBtn.addEventListener('click', () => {
-    const user = getUser();
-    if (!user) {
-      closeModal(bookingModal);
-      openModal(loginModal);
-      return;
-    }
-    const qty = Math.max(1, Math.min(10, parseInt(qtyInput.value || '1', 10)));
-    const reservation = {
-      movieId: currentBooking.movieId,
-      title: currentBooking.title,
-      time: currentBooking.time,
-      qty,
-      user: user.name,
-      createdAt: new Date().toISOString()
-    };
+window.cerrarButacas = function() {
+  modalButacas.style.display = 'none';
+  reservaActual = null;
+};
 
-    const prev = JSON.parse(localStorage.getItem('cineReservations') || '[]');
-    prev.push(reservation);
-    localStorage.setItem('cineReservations', JSON.stringify(prev));
-    closeModal(bookingModal);
-    alert(`¡Reserva confirmada!\nPelícula: ${reservation.title}\nHorario: ${reservation.time}\nEntradas: ${reservation.qty}`);
+function dibujarSala(movieId, time) {
+  salaGrid.innerHTML = '';
+  const ocupadas = getOcupadas(movieId, time);
+
+  FILAS.forEach(fila => {
+    const filaDiv = document.createElement('div');
+    filaDiv.className = 'fila-asientos';
+
+    const labelIzq = document.createElement('span');
+    labelIzq.className = 'fila-label';
+    labelIzq.textContent = fila;
+    filaDiv.appendChild(labelIzq);
+
+    COLUMNAS.forEach(col => {
+      if (col === 5) {
+        const pasillo = document.createElement('span');
+        pasillo.className = 'pasillo';
+        pasillo.textContent = 'PASILLO';
+        filaDiv.appendChild(pasillo);
+      }
+
+      const asientoId = `${fila}${col}`;
+      const btnAsiento = document.createElement('button');
+      btnAsiento.type = 'button';
+      btnAsiento.className = 'butaca';
+      btnAsiento.dataset.id = asientoId;
+
+      if (ocupadas.includes(asientoId)) {
+        btnAsiento.classList.add('ocupada');
+        btnAsiento.textContent = '✕';
+        btnAsiento.disabled = true;
+      } else {
+        btnAsiento.textContent = asientoId;
+        btnAsiento.onclick = () => toggleButaca(asientoId, btnAsiento);
+      }
+
+      filaDiv.appendChild(btnAsiento);
+    });
+
+    const labelDer = document.createElement('span');
+    labelDer.className = 'fila-label';
+    labelDer.textContent = fila;
+    filaDiv.appendChild(labelDer);
+
+    salaGrid.appendChild(filaDiv);
   });
 }
 
-// Renderizado de Tarjetas con Sinopsis
+function toggleButaca(id, elemento) {
+  const index = reservaActual.butacas.indexOf(id);
+  if (index > -1) {
+    reservaActual.butacas.splice(index, 1);
+    elemento.classList.remove('seleccionada');
+  } else {
+    reservaActual.butacas.push(id);
+    elemento.classList.add('seleccionada');
+  }
+  actualizarResumen();
+}
+
+function actualizarResumen() {
+  const cant = reservaActual.butacas.length;
+  if (cant === 0) {
+    resAsientosLista.textContent = 'Ninguna seleccionada';
+    resCantidad.textContent = '0 butacas seleccionadas';
+  } else {
+    resAsientosLista.textContent = reservaActual.butacas.sort().join(', ');
+    resCantidad.textContent = `${cant} butaca${cant > 1 ? 's' : ''} seleccionada${cant > 1 ? 's' : ''}`;
+  }
+  resTotal.textContent = `$${(cant * PRECIO_ENTRADA).toLocaleString('es-AR')}`;
+}
+
+window.confirmarCompra = function() {
+  if (!reservaActual || reservaActual.butacas.length === 0) {
+    alert('Por favor, seleccioná al menos una butaca.');
+    return;
+  }
+
+  const user = getUser();
+  const total = reservaActual.butacas.length * PRECIO_ENTRADA;
+  const nuevaReserva = {
+    usuario: user.name,
+    pelicula: reservaActual.title,
+    horario: reservaActual.time,
+    butacas: [...reservaActual.butacas],
+    total: total,
+    fecha: new Date().toLocaleDateString('es-AR')
+  };
+
+  const reservas = JSON.parse(localStorage.getItem('cineReservations') || '[]');
+  reservas.push(nuevaReserva);
+  localStorage.setItem('cineReservations', JSON.stringify(reservas));
+
+  const key = `ocupadas_${reservaActual.movieId}_${reservaActual.time}`;
+  const ocupadas = getOcupadas(reservaActual.movieId, reservaActual.time);
+  localStorage.setItem(key, JSON.stringify([...ocupadas, ...reservaActual.butacas]));
+
+  alert(`¡Reserva confirmada con éxito!\n\nPelícula: ${nuevaReserva.pelicula}\nHorario: ${nuevaReserva.horario}\nButacas: ${nuevaReserva.butacas.join(', ')}\nTotal: $${total.toLocaleString('es-AR')}`);
+
+  cerrarButacas();
+};
+
+// --- RENDERIZADO CARTELERA ---
 function createMovieCard(movie) {
   const card = document.createElement('article');
   card.className = 'movie-card';
@@ -281,7 +307,6 @@ function createMovieCard(movie) {
   meta.className = 'movie-meta';
   meta.textContent = `${movie.genero} • ${movie.duracion}`;
 
-  // Párrafo de sinopsis
   const sinopsis = document.createElement('p');
   sinopsis.className = 'movie-sinopsis';
   sinopsis.textContent = movie.sinopsis;
@@ -301,9 +326,7 @@ function createMovieCard(movie) {
     btn.className = 'time-badge';
     btn.type = 'button';
     btn.textContent = t;
-    btn.setAttribute('data-movie-id', movie.id);
-    btn.setAttribute('data-movie-title', movie.titulo);
-    btn.setAttribute('data-time', t);
+    btn.onclick = () => abrirButacas(movie.id, movie.titulo, t);
     li.appendChild(btn);
     showtimesList.appendChild(li);
   });
@@ -328,27 +351,7 @@ function renderMovies(moviesList) {
   $movies.appendChild(fragment);
 }
 
-document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.time-badge');
-  if (!btn) return;
-  const movieId = parseInt(btn.dataset.movieId, 10);
-  const title = btn.dataset.movieTitle;
-  const time = btn.dataset.time;
-  const user = getUser();
-  if (!user) {
-    openModal(loginModal);
-    const onLogin = () => {
-      setTimeout(() => openBooking(movieId, title, time), 150);
-      document.removeEventListener('cine:logged-in', onLogin);
-    };
-    document.addEventListener('cine:logged-in', onLogin);
-    return;
-  }
-  openBooking(movieId, title, time);
-});
-
 window.addEventListener('DOMContentLoaded', () => {
   updateAuthView();
   renderMovies(peliculas);
 });
-
