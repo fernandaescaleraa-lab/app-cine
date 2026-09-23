@@ -1,4 +1,4 @@
-# Cinema App — Sistema de Cartelera y Reserva de Entradas 🎬
+# Cinema App — Sistema de Cartelera y Reserva de Entradas 
 
 Aplicación web interactiva desarrollada en el marco del workshop de IA dictado por el equipo de ingeniería de **AppDirect** para estudiantes de **Fundación EMPUJAR**.
 
