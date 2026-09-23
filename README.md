@@ -26,5 +26,5 @@ Aplicación web interactiva desarrollada en el marco del workshop de IA dictado 
 
 ---
 
-## 💡 Metodología
+##  Metodología
 Desarrollo guiado mediante herramientas de Inteligencia Artificial, aplicando descomposición de requerimientos por pantalla, historias de usuario (HU) e iteración de prompts.
