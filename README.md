@@ -2,11 +2,11 @@
 
 Aplicación web interactiva desarrollada en el marco del workshop de IA dictado por el equipo de ingeniería de **AppDirect** para estudiantes de **Fundación EMPUJAR**.
 
-🌐 **Demo en producción:** [https://app-cine-beta.vercel.app](https://app-cine-beta.vercel.app)
+ **Demo en producción:** [https://app-cine-beta.vercel.app](https://app-cine-beta.vercel.app)
 
 ---
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
 - **Cartelera interactiva:** Catálogo de películas con pósters, sinopsis y etiquetas de sala/formato.
 - **Tráilers oficiales:** Reproductor modal integrado con YouTube para cada título.
@@ -16,7 +16,7 @@ Aplicación web interactiva desarrollada en el marco del workshop de IA dictado 
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+##  Tecnologías utilizadas
 
 - **HTML5:** Estructura semántica.
 - **CSS3:** Diseño responsivo con Flexbox, CSS Grid y estética Dark Mode.
